@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>
+            
+            <%= tittle %>
+
+        </title>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+         
+        <!--------------------font awesome style sheet link------------------->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+        <link rel="stylesheet" href="./assets/style.css">
+    </head>
+   
+    <body>
+      <section class="container">
+        <h1 style="text-align: center"> TO-DO List App </h1>
+
+
+        <!-----------------form to create task------------------->
+        <form action="/create-task" method="POST">
+            <table class="table">
+                <thead>
+                  <tr class="table-active">
+                    <th >Add Task</th>
+                    <th >Category</th>
+                    <th >Date</th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                  </tr>
+                </thead>
+        
+                <tbody>
+                    <tr>
+                      <td><input type="text" name="description" placeholder="What do you want to do?" required></input></td>
+                      <td>
+                        <select name="category" required>
+
+                          <option class="category-personal"> Personal </option>
+                          <option class="category-work"> Work </option>
+                          <option class="category-school"> School </option>
+                          <option class="category-cleaning"> Cleaning </option>
+                          <option class="category-shopping"> Shopping </option>
+                          <option class="category-others"> Others </option>
+
+                        </select>
+                      </td>
+                      <td><input type="date" name="date" required></td>
+                      <!-----------button for adding task----------->
+                      <td><input type="submit"  class="btn btn-success"id="add" value="ADD TASK"></td>
+                      <!-----------button for deleting task----------->
+                      <td><input type="submit" class="btn btn-danger" value="DELETE TASK"></td>
+                    </tr>
+                </tbody>
+        
+            </table>        
+          </form>
+    </section>
+        
+    <div>          
+      <h1 style="text-align: center">Task List</h1>
+      <!--------To delete task------->
+        <form action="/delete-task" method="GET">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Select</th>
+                <th>Task</th>
+                <th>Category</th>
+                <th>Due Date</th>
+              </tr>
+            </thead>
+                  
+            <% for (let i of task) { %>
+                            
+              <tr>
+                <td><input type="checkbox" name="<%= i._id %>"></td>
+                <td><p id="task-description"><%= i.description %></td>
+                <td><p id="task-category"></p><%= i.category %></td>
+                <td><p id="due-date"><%= i.date %></p></td>
+              </tr>
+                    
+            <% } %>
+          </table>
+        </form>
+    </div>
+    <script src=" https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </body>  
+</html>
